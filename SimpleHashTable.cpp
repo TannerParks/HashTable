@@ -14,35 +14,44 @@ int find_value(string str){
 
     return str_val;
 }
-HashNode add_value(string word, int value){
-    if (value > 50){
+HashNode add_value(string word){
+    HashNode new_node;
+    //HashNode array[50];
+    int value;  //this is the key for the word in the table
+
+    value = find_value(word);   //gets the key from here
+
+    if (value > 50){    //if the key is larger than the array then make it fit by using the % sign
         value = value % 50;
         cout << "The value of the string is: " << value << endl;
     }
-    HashNode new_node;
-    new_node.key = value;
+    new_node.key = value;   //these things add the information to the HashNode
     new_node.word = word;
-    new_node.next = nullptr;
+    //new_node.next = nullptr;
+
+    //array[new_node.key] = new_node;
+
     return new_node;
+}
+
+void display(HashNode array[], int value){
+    cout << "Word at array " << value << " is " << array[value].word << endl;
 }
 
 
 int main(){
-    string str;
-    int value;
-    cout << "Enter a word: ";
-    cin >> str;
-    value = find_value(str);
-    //cout << value << endl;
-    cout << "The value of the string is: " << value << endl;
+    HashNode new_node;
+    HashNode array[50];
 
-    HashNode node;
-    node = add_value(str, value);
-    //node.key = value;
-    //node.word = str;
-    //node.next = nullptr;
-    HashNode array [50];
-    array [node.key] = node;
+    new_node = add_value("ZXZ");
+    array[new_node.key] = new_node;
+    display(array, 26);
 
-    std::cout << "Node at " << node.key << " is " << array[node.key].word << endl;
+    new_node = add_value("dad");
+    array[new_node.key] = new_node;
+    display(array, 9);
+
+    new_node = add_value("add");
+    array[new_node.key] = new_node;
+    display(array, 9);
 }
